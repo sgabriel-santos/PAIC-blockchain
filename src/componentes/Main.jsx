@@ -109,8 +109,8 @@ export default class NameForm extends React.Component {
           {this.state.loading? <div>Loading...</div>:
             <div>
               <Nav account={this.state.account}/>
-              <Routes list={this.state.pressures}/>
-              {/* <div className='form-group mr-sm-2'>
+              {/* <Routes list={this.state.pressures}/> */}
+              <div className='form-group mr-sm-2'>
                 <div className="py-5 text-center">
                   <h2>Registre a sua pressão arterial</h2>
                   <p className="lead">Olá, precisamos que você registre diáriamente sua pressão arterial, para que possa ser vista pelo seu médico regularmente. Não se preocupe, seus dados estão seguros!</p>
@@ -127,7 +127,7 @@ export default class NameForm extends React.Component {
                 <Graph pressures={this.state.pressures}/>
                 
                 <List list={this.state.pressures}/>
-              </div> */}
+              </div>
             </div>
           }
         </div>

@@ -4,8 +4,6 @@ export default props => {
 
     const renderRows = () => {
         const list = props.list || []
-        console.log('oi'+props)
-        console.log(props)
         // console.log('oi')
         // console.log(list)
         return list.map((todo,key) => (
@@ -20,7 +18,6 @@ export default props => {
 
     return (
         <table className='table table-striped table-sm'>
-            <h2>oi</h2>
             <thead>
                 <tr>
                     <th>Date</th>
