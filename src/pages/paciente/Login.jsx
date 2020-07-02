@@ -3,6 +3,7 @@ import FormLogin from '../../componentes/FormLogin'
 import {gera_id} from '../../functions/login'
 import Info from '../../componentes/Information.jsx'
 import Load from '../../componentes/Load'
+import '../../styles/Login.css'
 
 export default class Login extends React.Component{
     constructor(props){
@@ -60,7 +61,31 @@ export default class Login extends React.Component{
                     name={this.state.name}/>
     }
 
+    trocarUser(){
+        this.state.user.contract.methods.trocaUser().send({from:this.state.user.myData.account})
+        .once('transactionHash', (hash) => { 
+            this.setState({waitingConfirmation:false,loading:true})
+        })
+        .on('confirmation', (confNumber) => { 
+            if(confNumber === 1){
+                this.setState({waitingConfirmation:false, loading:false}) //*******************//
+                window.alert("Usuário trocado com sucesso!")
+                document.location.reload()
+            }
+        })
+        .on('error', (error) => { 
+            console.log(error.message, 'error') 
+            this.setState({waitingConfirmation:false, loading:false})
+            window.alert('Operação Cancelada')
+        })
+    }
+
     render() {
-        return this.choicePage()
+        return(
+            <div>
+                {this.choicePage()}
+                <button className="buttonTroca" onClick={() => this.trocarUser()}>aaskdfhlkasdjhfkljahsdf</button>
+            </div>
+        ) 
     }
 }

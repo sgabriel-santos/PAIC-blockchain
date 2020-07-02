@@ -1,9 +1,5 @@
-#formLogin {
-    max-width: 420px;
-    margin: auto;
-    padding-top: 5px;
-}
-
-#expLogin{
-    max-width: 560px;
+.buttonTroca{
+    color: white;
+    background-color: white;
+    opacity: 0;
 }
