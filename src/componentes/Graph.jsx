@@ -1,6 +1,7 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2'
-
+import '../styles/Graph.css'
+import {getLabel} from '../functions/graph'
 export default props => {
 
     const plotGraph = (sistole,diastole,label) => {
@@ -14,14 +15,14 @@ export default props => {
                         backgroundColor: 'red',
                         borderColor: 'red',
                         fill:false,
-                        data: sistole
+                        data: diastole
                         },
                         {
                         label:'Sistole',
                         backgroundColor: 'blue',
                         borderColor: 'blue',
                         fill:false,
-                        data: diastole
+                        data: sistole
                         }
                     ]
                 }}
@@ -52,26 +53,13 @@ export default props => {
         )
     }
     const inicializa = () => {
-        const list = props.pressures || []
-        const label = []
-        const sistole = []
-        const diastole = []
-        var atualDate = ''
-        list.map((dado,key) => {
-            sistole.push(dado.sistole)
-            diastole.push(dado.diastole)
-            if(atualDate !== dado.date){
-                label.push([dado.time,dado.date.replace(/-/g,'/')])
-                atualDate = dado.date;
-            }else label.push(dado.time)
-        })
-
-        return plotGraph(sistole,diastole,label)
+        const list = props.data || []
+        const label = getLabel(list.date)
+        return plotGraph(list.sistole,list.diastole,label)
     }
 
-
     return(
-        <div>
+        <div id="graph">
             {inicializa()}
         </div>
     )

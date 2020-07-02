@@ -1,11 +1,11 @@
 import React from 'react'
-
+import {alteraData} from '../functions/list'
 export default props => {
 
     const renderRows = () => {
-        const list = props.list || []
-        // console.log('oi')
-        // console.log(list)
+        const l = props.data || []
+        const list = alteraData(l)
+        
         return list.map((todo,key) => (
             <tr key={key}>
                 <td>{todo.date.toString()}</td>
