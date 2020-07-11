@@ -1,7 +1,10 @@
 import React from 'react'
-
+import '../styles/perfil.css'
 export default props => {
     return(
-        <div> Seu id é: {props.user.myData.id}</div>
+        <div>
+            <p><span className='title'>Nome:</span> {props.user.myData.name}</p>
+            <p><span className='title'>ID:</span> {props.user.myData.id}</p>  
+        </div>
     )
 }

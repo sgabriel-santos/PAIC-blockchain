@@ -8,20 +8,19 @@ import '../../styles/Login.css'
 export default class Login extends React.Component{
     constructor(props){
         super(props)
-        this.state = {name: '', user: props.user,
-            waitingConfirmation:false, loading:false} //************//
+        this.state = {name: '', waitingConfirmation:false, loading:false}
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     cadastrar(name,id){
-        this.state.user.contract.methods.register(name,id).send({from:this.state.user.myData.account})
+        this.props.user.contract.methods.register(name,id).send({from:this.props.user.myData.account})
         .once('transactionHash', (hash) => { 
             this.setState({waitingConfirmation:false,loading:true})
         })
         .on('confirmation', (confNumber) => { 
             if(confNumber === 1){
-                this.setState({waitingConfirmation:false, loading:false}) //*******************//
+                this.setState({waitingConfirmation:false, loading:false}) //*************//
                 window.alert("Login efetuado com sucesso com sucesso")
                 document.location.reload()
             }
@@ -62,7 +61,7 @@ export default class Login extends React.Component{
     }
 
     trocarUser(){
-        this.state.user.contract.methods.trocaUser().send({from:this.state.user.myData.account})
+        this.props.user.contract.methods.trocaUser().send({from:this.props.user.myData.account})
         .once('transactionHash', (hash) => { 
             this.setState({waitingConfirmation:false,loading:true})
         })
@@ -84,7 +83,7 @@ export default class Login extends React.Component{
         return(
             <div>
                 {this.choicePage()}
-                <button className="buttonTroca" onClick={() => this.trocarUser()}>aaskdfhlkasdjhfkljahsdf</button>
+                <button className="buttonTroca" onClick={() => this.trocarUser()}>Está aqui só para fins de teste</button>
             </div>
         ) 
     }

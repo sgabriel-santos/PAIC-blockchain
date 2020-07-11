@@ -9,14 +9,14 @@ export default class Home extends React.Component{
     constructor(props){
         super(props);
         const date = new Date()
-        this.state = { user: props.user, sistole: '', diastole:'', time: getTime(), date: getDate(),
+        this.state = {sistole: '', diastole:'', time: getTime(), date: getDate(),
           waitingConfirmation:false, loading:false}; //*********************//
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     addPressao(sistole,diastole,date){
-        this.state.user.contract.methods.addPressure(sistole,diastole,date).send({from:this.state.user.myData.account})
+        this.props.user.contract.methods.addPressure(sistole,diastole,date).send({from:this.props.user.myData.account})
         .once('transactionHash', (hash) => { 
           this.setState({waitingConfirmation:false,loading:true})
         })

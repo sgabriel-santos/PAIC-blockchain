@@ -8,7 +8,7 @@ import Table from '../../componentes/Table'
 export default class Pacientes extends React.Component {
     constructor(props){
         super(props)
-        this.state = {id: ''}
+        this.state = {id: '', waitingConfirmation:false, loading:true}
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -17,22 +17,17 @@ export default class Pacientes extends React.Component {
         this.props.user.contract.methods.addPatient(id).send({from:this.props.user.myData.account})
         .once('transactionHash', (hash) => { 
             this.setState({waitingConfirmation:false,loading:true})
-          })
-          .on('confirmation', (confNumber) => { 
-            if(confNumber === 1){
-            //   this.props.submitPressure(
-            //     {sistole:this.state.sistole,
-            //       diastole:this.state.diastole,
-            //       date
-            //     })
-                this.setState({waitingConfirmation:false, loading:false, id:''}) //*******************//
-                window.alert("Patient adicionado com sucesso")
-            }
-          })
-          .on('error', (error) => { 
-            console.log(error.message, 'error') 
-            this.setState({waitingConfirmation:false, loading:false})
-            window.alert('Operação Cancelada')
+        })
+        .on('confirmation', (confNumber) => { 
+        if(confNumber === 1){
+            this.setState({waitingConfirmation:false, loading:false, id:''}) //*******************//
+            window.alert("Patient adicionado com sucesso")
+        }
+        })
+        .on('error', (error) => { 
+        console.log(error.message, 'error') 
+        this.setState({waitingConfirmation:false, loading:false})
+        window.alert('Operação Cancelada')
           })
     }
 
